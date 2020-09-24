@@ -22,6 +22,8 @@ public class BatchController {
     @GetMapping
     public BatchStatus getJob() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
         final Map<String, JobParameter> params = new HashMap<>();
+        // Required to re-execute when re-called.
+        params.put("uniqueness", new JobParameter(System.nanoTime()));
         final JobParameters jobParameters = new JobParameters(params);
         final JobExecution execution = jobLauncher.run(job, jobParameters);
 

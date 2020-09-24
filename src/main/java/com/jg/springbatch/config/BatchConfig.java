@@ -29,7 +29,7 @@ public class BatchConfig {
     @Bean
     public Job job(final JobBuilderFactory jobBuilderFactory,
                    @Qualifier("step") final Step step,
-                   @Qualifier("finalSteph") final Step finalStep) {
+                   @Qualifier("finalStep") final Step finalStep) {
         return jobBuilderFactory.get("job-name")
                 .incrementer(new RunIdIncrementer())
                 // Initial step.
@@ -61,8 +61,8 @@ public class BatchConfig {
     }
 
     @Bean
-    public Step finalSteph(final StepBuilderFactory stepBuilderFactory,
-                           final Tasklet finalTasklet) {
+    public Step finalStep(final StepBuilderFactory stepBuilderFactory,
+                          final Tasklet finalTasklet) {
         return stepBuilderFactory.get("final-step")
                 // Tasklet to execute at Step.
                 .tasklet(finalTasklet)
